@@ -1,0 +1,49 @@
+<mat-toolbar class="my-3 px-3">
+    <span class="example-spacer"></span>
+    <button mat-button>
+        <img src="../../../../../assets/images/profile-pic.png" alt="" class="profile-pic mr-2"> 
+        Lauren Richard
+    </button>
+    <button mat-button class="px-1">
+      <mat-icon class="pale-blue" aria-hidden="true">translate</mat-icon>
+      <!-- <mat-form-field appearance="outline">
+        <mat-select>
+          <mat-option>En</mat-option>
+          <mat-option>Hi</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </button>
+    <button mat-button class="px-1">
+      <mat-icon class="moon-icon pale-blue">brightness_2_rounded</mat-icon>
+    </button>
+    <button mat-button class="px-1" [matMenuTriggerFor]="notification">
+      <span matBadge="15" matBadgeColor="warn" matBadgeSize="small">
+        <mat-icon class="pale-blue" aria-hidden="true">notifications_none_rounded</mat-icon>
+      </span>
+    </button>
+    <mat-menu #notification="matMenu">
+        <button mat-menu-item>
+          <mat-icon>notification_important</mat-icon>
+          <span>Notification One</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>
+          <mat-icon>notification_important</mat-icon>
+          <span>Notification One</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item>
+          <mat-icon>notification_important</mat-icon>
+          <span>Notification One</span>
+        </button>
+    </mat-menu>
+    <button mat-button class="px-1" [matMenuTriggerFor]="more">
+      <mat-icon class="pale-blue">more_horiz</mat-icon>
+    </button>
+    <mat-menu #more="matMenu">
+      <button mat-menu-item>Menu One</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item>Menu Two</button>
+    </mat-menu>
+  
+    </mat-toolbar>

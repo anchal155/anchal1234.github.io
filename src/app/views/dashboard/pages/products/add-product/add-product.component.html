@@ -1,0 +1,278 @@
+<div class="container-fluid content-wrapper pb-5">
+  <form *ngIf="addProductFormgroup" class="add-product" [formGroup]="addProductFormgroup" (ngSubmit)="onSubmit()" >
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="breadcrumbs text-gray">
+        <a [routerLink]="['/dashboard/products']"  class="text-gray">Product</a> <mat-icon>keyboard_arrow_right</mat-icon> Add Product
+      </div>
+    </div>
+  </div>
+  <div class="row pb-3">
+    <div class="col-lg-12 d-flex align-items-center">
+      <h1 class="py-2">Add Product</h1>    
+      <div class="ml-auto py-2">
+        <button type="button" mat-button class="px-0 mr-2">
+          <mat-icon class="pale-blue">settings</mat-icon>
+        </button>
+        <button type="submit" mat-button class="purple-btn ml-auto px-4 py-2">Save</button>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex pb-4">
+    <div class="col-lg-6 ">
+      <section class="content-box px-4 pt-5 pb-4">
+        <h5>General Details</h5>
+        <small class="text-med text-gray">Upload Your Product Images</small>
+        <div class="row add-product-pic py-3">
+          <div class="col-lg-12">
+            <button type="button" mat-raised-button (click)="fileInput1.click()"><mat-icon class="pale-blue icon-big">add_a_photo</mat-icon></button> 
+            <input hidden type='file'#fileInput1  (change)="onSelectFile($event)" multiple>
+            <img class="ml-2" *ngFor='let url of urls'  [src]="url || 'http://placehold.it/180'" alt="Product image"> 
+            <!-- <button type="button" (click)="fileInput1.click()" mat-raised-button class="ml-2"><mat-icon class="pale-blue icon-big">add</mat-icon></button>  -->
+          </div>
+        </div>
+        <div class="row bar-code">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Barcode <mat-icon class="pale-blue" matTooltip="Info about the action" matTooltipClass="example-tooltip-theme-color">info</mat-icon></mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('barcode') as control">
+              <input matInput formControlName="barcode" (change)="checkUPCcode(barcode.value)" #barcode placeholder="Enter Barcode" >
+              <a (click)="genrateBarCode()" matSuffix class="bar-code-icon">
+                <mat-icon>qr_code_scanner</mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">QR code</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('qrcode') as control">
+              <input matInput formControlName="qrcode" placeholder="Enter QR code">
+              <a href="javascript:void(0);" matSuffix class="bar-code-icon">
+                <mat-icon>qr_code_scanner</mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray"><i>Select type for barcode</i></mat-label>
+            <!-- <mat-chip-list class="example-chip" formControlName="barcode_type" aria-label="Fish selection" cdkDropList cdkDropListOrientation="horizontal"> -->
+              <!-- <mat-chip color="accent" class="example-box" selected>Codebar</mat-chip> -->
+              <!-- <mat-chip *ngFor="let code of codeList">{{code}}</mat-chip>
+            </mat-chip-list> -->
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('barcode_type') as control">
+              <mat-select placeholder="Select type for barcode" formControlName="barcode_type">
+                <mat-option *ngFor="let code of codeList" [value]="code.value">{{ code.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Product Name * </mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('name') as control">
+              <input matInput formControlName="name" placeholder="Enter Product Name">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Category Name *</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width"  *ngIf="addProductFormgroup.get('cat_id') as control">
+              <mat-select placeholder="Select Category Name" formControlName="cat_id">
+                <mat-option>Select Category Name</mat-option>
+                <mat-option *ngFor="let category of categoryList" [value]="category.id">
+                  {{category.name}}
+                </mat-option> 
+                <p class="create-category" (click)="open(mymodal)"> <mat-icon>add</mat-icon> Create Category</p>            
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray">Product Description</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('description') as control">
+              <textarea matInput formControlName="description" placeholder="Enter Product description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-form-field>
+            <input type="text" placeholder="Enter City" matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </section>
+    </div>
+    <div class="col-lg-6">
+      <section class="content-box px-4 py-5">
+        <h5 class="pb-2">Inventory</h5>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Unit</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('sell_by') as control">
+              <mat-select placeholder="Select Unit" formControlName="sell_by">
+                <mat-option *ngFor="let unit of unitList" [value]="unit.id">{{ unit.unit_name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Secondary unit</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('secondry_unit') as control">
+              <mat-select placeholder="Select Secondary Unit" formControlName="secondry_unit">
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Opening Stock</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('qty') as control">
+              <input matInput placeholder="Enter Opening Stock" formControlName="qty">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">As of Date</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('as_of_date') as control">
+              <input matInput formControlName="as_of_date" [matDatepicker]="picker"  [(ngModel)]="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Low Stock units</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('min_qty') as control">
+              <input matInput placeholder="Low Stock units" formControlName="min_qty">
+            </mat-form-field>
+          </div>
+        </div>
+        <h5 class="pt-4 pb-2">Pricing</h5>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Sales Price</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('sell_price') as control">
+              <span matPrefix class="text-pale-blue">&#8377; &nbsp;</span>
+              <input matInput placeholder="Enter Sales Price" formControlName="sell_price" (keyup)="test_fn(sale.value,'sell_price')" #sale (change)="formatMoneyBase(sale.value,'sell_price')">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">Purchase Price</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('purchase_price') as control">
+              <span matPrefix class="text-pale-blue">&#8377; &nbsp;</span>
+              <input matInput placeholder="Enter Purchase Price" formControlName="purchase_price" (keyup)="test_fn(purchase.value,'purchase_price')" #purchase (change)="formatMoneyBase(purchase.value,'purchase_price')">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">HSN Code</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('hsn_code') as control">
+              <input matInput placeholder="Enter HSN Code" formControlName="hsn_code">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6">
+            <mat-label class="font-sm text-med text-dim-gray">GST Tax Rate(%)</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('product_taxe') as control">
+              <mat-select placeholder="Enter GST Rate" formControlName="product_taxe">
+                <mat-option value="0">GST @ 0%</mat-option>
+                <mat-option value="0.25" >GST @ 0.25%</mat-option>
+                <mat-option value="3" >GST @ 3%</mat-option>
+                <mat-option value="5" >GST @ 5%</mat-option>
+                <mat-option value="12" >GST @ 12%</mat-option>
+                <mat-option value="18" >GST @ 18%</mat-option>  
+                <mat-option value="28" >GST @ 28%</mat-option>  
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="row d-flex pt-2 shipping-section">
+    <div class="col-lg-6">
+      <section class="content-box px-4 py-5">
+        <h5 class="pb-2">Shipping</h5>
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray">Weight</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('shipping_weight') as control">
+              <input matInput placeholder="0.0" formControlName="shipping_weight">
+              <mat-icon matSuffix class="font-sm pale-blue">KG</mat-icon>
+            </mat-form-field> 
+            <mat-label class="font-sm text-med text-dim-gray">Customs Informations</mat-label>
+            <p class="font-sm text-dim-gray line-h-normal">Used by border officers to calculate duties when shipping internationally. Shown on customs forms you print during fulfillment.</p>
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray">Country/Region of origin</mat-label>
+            <mat-form-field appearance="outline"  class="example-full-width" *ngIf="addProductFormgroup.get('country') as control">
+              <input matInput formControlName="country" placeholder="Select country/region">
+            </mat-form-field> 
+          </div>
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray">HS (Harmonized System) code</mat-label>
+            <mat-form-field appearance="outline"  class="example-full-width" *ngIf="addProductFormgroup.get('shop_keyword') as control">
+              <mat-icon matPrefix class="font-xxl pale-blue">search &nbsp; </mat-icon>
+              <input matInput formControlName="shop_keyword" placeholder="Search by product keyword or HS code" >
+            </mat-form-field> 
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="col-lg-6">
+      <section class="content-box px-4 py-5">
+        <h5 class="pb-2">Variants</h5>
+        <div class="row">
+          <div class="col-lg-12">
+            <mat-label class="font-sm text-med text-dim-gray">Options</mat-label>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('variant') as control">
+              <mat-select  formControlName="variant" placeholder="Size">
+                <mat-option value="size">Size</mat-option>
+                <mat-option value="color">color</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width" *ngIf="addProductFormgroup.get('var_option') as control">
+              <input matInput formControlName="var_option" placeholder="Separate options with a comma">
+            </mat-form-field>
+          </div>
+          <div class="col-lg-12">
+            <button type="submit" mat-button class="purple-btn mb-5 px-4 py-2">Add Another Option</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="example-button-container fab-btn">
+  <button mat-fab aria-label="Example icon button with a home icon">
+    <mat-icon class="mx-1">chat</mat-icon>
+    <mat-icon class="mx-1">add_circle</mat-icon>
+  </button>
+</div>
+  
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header" style=" background-color: #EAEBEB;">
+      <h4 class="modal-title" id="modal-basic-title" style="font-weight: bold;margin-top: 6px">Create New Category </h4>
+
+      <button type="button" id="c" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">×</span>
+      </button>
+  </div>
+      <div class="modal-body">
+        <div >Category</div>
+          <div>
+              <input id="cat" type="text" class="form-control" placeholder="Enter category"  />
+          </div>
+   
+      </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary nextBtn pull-right" style="margin: 10px" type="button"
+          (click)="addCetegory()">SUBMIT</button>
+  </div>
+</ng-template>

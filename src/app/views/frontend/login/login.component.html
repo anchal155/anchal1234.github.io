@@ -1,0 +1,38 @@
+<div id="step1" class="text-center">
+    <form class="form-signin">
+        <label for="inputPhone" class="sr-only">Mobile Number</label>
+        <input type="text" id="mobile" class="form-control" (keypress)="isNumber($event)" maxlength="10"
+            placeholder="Mobile number">
+        <div *ngIf="checkMobile" class="error">
+            Mobile no is required
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" id="submit" type="button" (click)="step1()">Login</button>
+    </form>
+</div>
+<div id="otp" class="text-center" style="display: none">
+    <form class="form-signin">
+        <label for="inputPhone" class="sr-only">Mobile Number</label>
+        <input type="text" [(ngModel)]="mobile" name="mobile" class="form-control" maxlength="10"
+            placeholder="Mobile number" disabled>
+        <br>
+        <form class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+            <div>
+                <div>OTP</div>
+                <input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
+                <input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
+                <input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" />
+                <input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" />
+                <input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
+                <input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
+            </div>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" id="submit" type="button" (click)="otp()">Verify
+                OTP</button>
+        </form>
+    </form>
+</div>
+
+<div class="forgot-pass text-center">
+        <a routerLink="/register">Go to signup</a>
+</div>

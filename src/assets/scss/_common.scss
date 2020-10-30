@@ -1,0 +1,394 @@
+@import "./variables";
+
+/* 1. Theme default css */
+textarea:focus, 
+input:focus,
+a:focus {
+    outline: none;
+}
+body {
+	font-family: $font_1;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 16px;
+	transition: all 1s linear;
+	-webkit-transition: all 1s linear;
+	background-color: $white-smoke;
+	.mat-button {
+		min-width: 42px;
+		transition: all 0.5s;
+		&:hover {
+			.mat-icon {
+				color: $theme-color8;
+			}
+		}
+	}
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $font_1;
+	color: $full-black;
+	margin-top: 0px;
+	font-style: normal;
+	font-weight: 700;
+	text-transform: normal;
+}
+h1 {
+	font-size: 42px;
+}
+h2 {
+	font-size: 36px;
+}
+h3 {
+	font-size: 30px;
+}
+h4 {
+	font-size: 26px;
+}
+h5 {
+	font-size: 22px;
+}
+h6 {
+	font-size: 18px;
+}
+p {
+	font-family: $font_1;
+	color: $black;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 30px;
+	margin-bottom: 15px;
+	font-weight: normal;
+}
+
+.img {
+	max-width: 100%;
+	//@include transition(.3s);
+}
+.f-left {
+	float: left
+}
+.f-right {
+	float: right
+}
+.fix {
+	overflow: hidden
+}
+.clear{
+    clear: both;
+}
+
+a,
+.button {
+	//@include transition(.3s);
+}
+a:focus,
+.button:focus {
+	text-decoration: none;
+	outline: none;
+}
+a{
+	color: $theme-color2;
+}
+a:focus,
+a:hover {
+	text-decoration: none;
+	color: $theme-color2;
+}
+a,
+button {
+	outline: medium none;
+}
+button:focus,
+input:focus,
+input:focus,
+textarea,
+textarea:focus {
+	outline: 0;
+	border: none ;
+	box-shadow: none ;
+}
+
+
+input:focus::-moz-placeholder {
+	opacity: 0;
+	-webkit-transition: .4s;
+	-o-transition: .4s;
+	transition: .4s;
+}
+
+
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+	color: inherit;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+li {
+	list-style: none
+}
+
+hr {
+	border-bottom: 1px solid #eceff8;
+	border-top: 0 none;
+	margin: 30px 0;
+	padding: 0;
+}
+
+.btn.focus, .btn:focus {
+	outline: 0;
+	box-shadow:none; 
+}
+
+body {
+	.mat-button,
+	.mat-tab-label,
+	.mat-tab-group {
+		font-family: $font_1;
+	}
+	.mat-form-field-appearance-outline {
+		.mat-form-field-outline-start,
+		.mat-form-field-outline-gap,
+		.mat-form-field-outline-end {
+			border-color: $white-smoke;
+		}
+		&.mat-focused {
+			.mat-form-field-outline-start,
+			.mat-form-field-outline-gap,
+			.mat-form-field-outline-end {
+				border-color: $theme-color2;
+			}
+		}
+	}
+}
+
+.mat-button {
+	font-family: $font_1;
+	&.purple-btn {
+		background: rgb(255,138,187);
+		background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+		color: $white;
+		font-size: 20px;
+		font-weight: 700;
+		border-radius: 50px;
+		position: relative;
+		overflow: hidden;
+		&:hover {
+			background: linear-gradient(180deg, $theme-color7 0%, $theme-color8 100%);
+		}
+		&:before,
+		&:after {
+		  content: "";
+		  position: absolute;
+		  width: 75px;
+		  height: 75px;
+		  border: 15px solid $white;
+		  background-color: transparent;
+		  border-radius: 50%;
+		  opacity: 0.25;
+		}
+		&:before {
+		  left: -40px;
+		  top: -15px;
+		}
+		&:after {
+		  right: 0;
+		  bottom: 30px;
+		}
+	}
+	&.white-btn {
+		background: $white;
+		color: $full-black;
+		font-size: 20px;
+		font-weight: 700;
+		border-radius: 50px;
+		transition: all 0.5s;
+		box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+		&:hover {
+			background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+			color: $white;
+		}
+	}
+	&.rose-btn {
+		background: linear-gradient(180deg, $theme-color7 0%, $theme-color8 100%);
+		border-radius: 50px;
+		color: $white;
+	}
+}
+
+section {
+	&.content-box {
+		border-radius: 20px;
+		background-color: $white;
+		box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+	}
+}
+
+mat-tab-header {
+	&.mat-tab-header {
+		border-radius: 50px;
+		background-color: $white;
+		box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+		border-bottom: none;
+		padding: 8px;
+		.mat-tab-label {
+			color: $dim-gray;
+			font-size: 16px;
+			min-width: 0;
+			padding: 0 15px;
+			opacity: 1;
+			&.mat-tab-label-active {
+				color: $white;
+			}
+		}
+	}
+	.mat-ink-bar {
+		height: 48px;
+		border-radius: 50px;
+		z-index: -1;
+		background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+	}
+}
+
+.content-wrapper {
+	position: relative;
+	&:before,
+	&:after {
+		position: absolute;
+		content: "";
+		
+		border-radius: 50%;
+		box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+		
+		z-index: -1;
+	}
+	&:before {
+		background: linear-gradient(180deg, $theme-color7 0%, $theme-color8 100%);
+		width: 110px;
+		height: 110px;
+		top: 50%;
+		left: -70px;
+	}
+	&:after {
+		background: linear-gradient(180deg, $theme-color5 0%, $theme-color6 100%);
+		width: 140px;
+		height: 140px;
+		top: 30%;
+		right: -15px;
+	}
+}
+
+.mat-drawer-content {
+	// &:after {
+	// 	position: absolute;
+	// 	content: "";
+	// 	width: 140px;
+	// 	height: 140px;
+	// 	border-radius: 50%;
+	// 	background: linear-gradient(180deg, $theme-color2 0%, $theme-color1 100%);
+	// 	box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+	// 	bottom: 0;
+	// 	right: 0;
+	// 	z-index: -1;
+	// }
+}
+
+.add-product {
+	.mat-select-arrow-wrapper {
+		display: inline-block;
+	}
+	.mat-form-field {
+		border-radius: 10px;
+	}
+	.mat-chip {
+		&.mat-standard-chip {
+			&.mat-chip-selected {
+				&.mat-accent {
+					background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+				}
+			}
+		}
+	}
+	.mat-form-field-appearance-outline {
+		.mat-form-field-outline {
+			background-color: $white-smoke;
+		}
+		.mat-form-field-infix {
+			padding: 1em 0 0.8em 0;
+			border-top-width: 0;
+		}
+		.mat-form-field-suffix {
+			top: 0.35em;
+		}
+		.mat-form-field-prefix {
+			top: 0;
+		}
+	}
+	.shipping-section {
+		.mat-form-field-appearance-outline { 
+			.mat-form-field-suffix {
+				top: 0em;
+			}	
+			.mat-form-field-prefix {
+				top: 0.35em;
+			}
+		}
+	}
+}
+
+.fab-btn {
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	z-index: 9;
+	.mat-fab  {
+		background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+		border-radius: 50px;
+		width: 110px;
+		.mat-button-wrapper {
+			line-height: 40px;
+			padding: 10px 0;
+			.mat-icon {
+				width: 40px;
+				height: 40px;
+				font-size: 36px;
+			}
+		}
+	}
+}
+
+.example-spacer {
+	flex: 1 1 auto;
+}
+  
+.mat-icon {
+	overflow: hidden;
+	vertical-align: middle;
+	&.moon-icon {
+	  transform: rotate(140deg);
+	}
+	&.pale-blue {
+		color: $pale-blue;
+	}
+}
+
+.example-tooltip-theme-color {
+	background: $theme-color8;
+}
+
+  
+.example-full-width {
+	width: 100%;
+}

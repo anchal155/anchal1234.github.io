@@ -1,0 +1,233 @@
+@import "/src/assets/scss/color";
+
+#sidenav.menu-open {
+  width: 25vw;
+  transition: all 0.5s;
+}
+#sidenav.menu-close {
+  width: 6vw;
+  transition: all 0.5s;
+  .store-logo {
+    img {
+      width: 48px;
+    }
+    &:before {
+      width: 65px;
+    }
+  }
+  .store-name {
+    font-size: 16px;
+  }
+  .navbar-nav {
+    li {
+      a {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        &.active,
+        &:hover {
+          padding-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+#main-container {
+  transition: 0.5s;
+}
+
+#sidenav {
+  background-color: $white;
+  border-radius: 0 40px 40px 0;
+  box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.1);
+}
+
+.logo {
+    min-height: 62px;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: "";
+      background: url(../../../assets/images/shape-blue.png) no-repeat 0 0/100%;
+      width: 36px;
+      height: 36px;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+  .logo-text {
+    font-size: 42px;
+    font-weight: 700;
+  }
+  .mat-button {
+    min-width: 42px;
+}
+}
+
+.reminders-section {
+  border-bottom: 10px solid $white-smoke;
+}
+
+.navbar-nav {
+  border-bottom: 10px solid $white-smoke;
+    li {
+        a {
+            display: block;
+            padding: 15px;
+            color: $pale-blue;
+            transition: all 0.5s;
+            position: relative;
+            &.active,
+            &:hover {
+              background: rgb(198,148,233);
+              background: linear-gradient(270deg, rgba(255,255,255,0.25) 0%, rgba(162,81,220,0.25) 100%);
+              color: $theme-color2;
+              // font-weight: 700;
+              padding-left: 30px;
+              &:before {
+                position: absolute;
+                content: "";
+                top: 0;
+                bottom: 0;
+                background: $theme-color2;
+                width: 8px;
+                left: 0;
+              }
+            }
+        }
+    }
+}
+
+.store-section {
+  background: rgb(255,138,187);
+  background: linear-gradient(180deg, $theme-color7 0%, $theme-color8 100%);
+  .store-logo {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: "";
+      width: 80px;
+      height: 40px;
+      background: $theme-color7;
+      z-index: -1;
+      border-radius: 10px 10px 0 0;
+      top: -30px;
+      left: -5px;
+    }
+    img {
+      width: 60px;
+      height: auto;
+      position: relative;
+      top: -15px;
+    }
+  }
+}
+
+.store-name {
+  font-size: 24px;
+  color: $white;
+  font-weight: 800;
+}
+
+.store-desc {
+  font-size: 12px;
+  color: $white;
+}
+
+.reminders-section {
+  h6 {
+    &.mat-line {
+      font-weight: 700;
+    }
+  }
+  p {
+    &.mat-line {
+      font-size: 12px;
+    }
+  }
+  .mat-list-avatar {
+    border-radius: 0;
+    width: 48px;
+    height: 48px;
+  }
+  .view-all-btn {
+    font-weight: 500;
+    color: $full-black;
+  }
+}
+
+.start-saving-section {
+  position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    background: url(../../../assets/images/shape-purple.png) no-repeat 0 0/100%;
+    width: 36px;
+    height: 36px;
+    bottom: 45px;
+    left: 10px;
+  }
+  h4 {
+    font-weight: 800;
+    position: absolute;
+  }
+}
+
+:host ::ng-deep .mat-list-item-content { padding: 0!important; }
+
+/* width */
+// ::-webkit-scrollbar {
+//   width: 10px;
+// }
+
+/* Track */
+// ::-webkit-scrollbar-track {
+//   box-shadow: inset 0 0 5px grey; 
+//   border-radius: 10px;
+// }
+ 
+/* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: red; 
+//   border-radius: 10px;
+// }
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #b30000; 
+// }
+
+.social-icons {
+  a {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    transition: all 0.5s;
+    img {
+      vertical-align: initial;
+    }
+    &.facebook {
+      background: linear-gradient(180deg, $theme-color5 0%, $theme-color6 100%);
+      &:hover {
+        background: #4267B2;
+      }
+    }
+    &.linkedin {
+      background: linear-gradient(180deg, $theme-color1 0%, $theme-color2 100%);
+      &:hover {
+        background: #2867B2;
+      }
+    }
+    &.twitter {
+      background: linear-gradient(180deg, $theme-color3 0%, $theme-color4 100%);
+      &:hover {
+        background: #1DA1F2;
+      }
+    }
+  }
+}

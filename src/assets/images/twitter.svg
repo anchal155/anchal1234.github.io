@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffdfba"/>
+      <stop offset="1" stop-color="#f19730"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3054" data-name="Group 3054" transform="translate(-442 -208)">
+    <rect id="Rectangle_411" data-name="Rectangle 411" width="32" height="32" rx="9" transform="translate(442 208)" fill="url(#linear-gradient)"/>
+    <path id="Icon_awesome-twitter" data-name="Icon awesome-twitter" d="M18.994,7.666c.013.188.013.376.013.564A12.26,12.26,0,0,1,6.663,20.575,12.261,12.261,0,0,1,0,18.627a8.976,8.976,0,0,0,1.048.054,8.689,8.689,0,0,0,5.387-1.854,4.347,4.347,0,0,1-4.057-3.009,5.472,5.472,0,0,0,.819.067,4.589,4.589,0,0,0,1.142-.148A4.339,4.339,0,0,1,.86,9.479V9.426a4.37,4.37,0,0,0,1.961.551,4.345,4.345,0,0,1-1.343-5.8,12.333,12.333,0,0,0,8.946,4.54,4.9,4.9,0,0,1-.107-.994,4.343,4.343,0,0,1,7.509-2.969A8.542,8.542,0,0,0,20.579,3.7a4.327,4.327,0,0,1-1.907,2.391,8.7,8.7,0,0,0,2.5-.672,9.327,9.327,0,0,1-2.176,2.243Z" transform="translate(447 211.619)" fill="#fff"/>
+  </g>
+</svg>

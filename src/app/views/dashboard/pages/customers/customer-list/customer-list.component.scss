@@ -1,0 +1,73 @@
+@import "../../../../../../assets/scss/color";
+
+mat-button-toggle-group {
+    font-size:25px;
+    color: rgb(24, 12, 12);
+}
+
+@media only screen and (max-width: 600px) {
+
+   .py-2 {
+     font-size:15px;
+     margin-left:-1rem;
+  }
+
+  table {
+    width: 100%;
+    display: table;
+    margin-top:3rem !important;
+    margin-left:-1.5rem;
+  }
+
+}
+
+
+.blue {
+    float:right;
+    padding-top:10%;
+    font-size:15px;
+}
+
+
+#button1 , #button2, #button3 {
+    font-size:15px;
+    margin-right:1rem;
+    padding-top:5px;
+}
+
+
+table {
+    width: 100%;
+    display: table;
+    margin-top:5rem !important;
+  }
+
+  tr {
+    display: table-row;
+    justify-content:center;
+  
+  }
+
+  th, td {
+    display: table-cell;
+    vertical-align: middle;
+    text-align:center !important;
+
+  }
+
+  ::ng-deep .mat-sort-header-container {
+    justify-content: center;
+  }
+
+  .checkbox{
+    text-align:center!important;
+    justify-content: center;
+  }
+
+
+ 
+
+
+
+
+ 

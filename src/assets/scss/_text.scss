@@ -1,0 +1,64 @@
+@import "./variables";
+
+.text-black {
+	color: $full-black;
+}
+
+.text-gray {
+	color: $gray;
+}
+.text-dim-gray {
+	color: $dim-gray;
+}
+
+.text-pale-blue {
+	color: $pale-blue;
+}
+
+.text-white {
+	color: $white !important;
+}
+
+.text-extra-bold {
+	font-weight: 800;
+}
+
+.text-normal {
+	font-weight: 400;
+}
+
+.text-med {
+	font-weight: 500;
+}
+
+.font-sm {
+	font-size: 14px;
+}
+
+.font-md {
+	font-size: 16px;
+}
+
+.font-lg {
+	font-size: 18px;
+}
+
+.font-xl {
+	font-size: 20px;
+}
+
+.font-xxl {
+	font-size: 22px;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.line-h-normal {
+    line-height: normal;
+}

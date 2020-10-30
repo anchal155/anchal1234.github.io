@@ -1,0 +1,42 @@
+@import "../../../../../../assets/scss/color";
+
+.add-product-pic {
+  button {
+    background-color: $white-smoke;
+    border-radius: 50%;
+    min-height: 68px;
+    min-width: 68px;
+    box-shadow: none;
+  }
+  img {
+    border-radius: 50%;
+    width: 68px;
+    height: 68px;
+  }
+}
+
+.bar-code-icon {
+  background: linear-gradient(180deg, $theme-color5 0%, $theme-color6 100%);
+  display: inline-block;
+  color: $white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  .mat-icon {
+    font-size: 16px;
+    padding: 4px;
+    &:hover {
+      color: $black;
+    }
+  }
+}
+
+.create-category {
+  border: 2px dashed $theme-color8;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  margin: 10px 15px 10px;
+  color: $theme-color8;
+  font-weight: 700;
+}

@@ -1,0 +1,237 @@
+<div class="container-fluid content-wrapper pb-5">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumbs text-gray">
+          <a [routerLink]="['/dashboard/settings']" class="text-gray">Settings </a> <mat-icon>keyboard_arrow_right</mat-icon> Account Settings
+        </div>
+      </div>
+    </div>
+    <div class="row pb-3">
+      <div class="col-lg-12 d-flex align-items-center">
+        <h1 class="py-2">Account Settings</h1>    
+        <div class="ml-auto py-2">
+          <button mat-button class="white-btn ml-auto px-4 mr-3 py-2">Cancel</button>
+          <button type="submit" mat-button class="purple-btn px-4 py-2">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="tabs">
+              <mat-tab-group animationDuration="0ms" [disableRipple]="true">
+                <mat-tab label="Account">
+                    <div class="row mx-0 d-flex mt-5">
+                      <div class="col px-0 mr-3">
+                        <section class="content-box px-4 pt-5 pb-4">
+                          <h5>General Information</h5>
+                          <form action="" class="add-product settings-form">
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Your Name</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Email ID (optional)</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your e-mail id">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Business Name</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your business name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Industry Type</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <mat-select [(value)]="selectedOptionIndType">
+                                    <mat-option value="1">-- Select industry type --</mat-option>
+                                    <mat-option value="2">Corporate</mat-option>
+                                    <mat-option value="3">Automobile</mat-option>
+                                    <mat-option value="4">Telecom</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Business Type (Select multiple)</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your business type">
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Is your business GST reg?*</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <mat-select [(value)]="selectedOptionGstReg">
+                                    <mat-option value="1">-- Select GST Reg --</mat-option>
+                                    <mat-option value="2">Yes</mat-option>
+                                    <mat-option value="3">No</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Street Address</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter atreet address">
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Description</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your description">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">State</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <mat-select [(value)]="selectedOptionState">
+                                    <mat-option value="1">-- Select State --</mat-option>
+                                    <mat-option value="2">Madhya Pradesh</mat-option>
+                                    <mat-option value="3">Tamil Nadu</mat-option>
+                                    <mat-option value="4">Kerala</mat-option>
+                                    <mat-option value="5">Telengana</mat-option>
+                                    <mat-option value="6">Uttar Pradesh</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">PIN/ZIP Code</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <input matInput formControlName="name" placeholder="Enter your description">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">Country</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <mat-select [(value)]="selectedOptionCountry">
+                                    <mat-option value="1">-- Select Country --</mat-option>
+                                    <mat-option value="2">India</mat-option>
+                                    <mat-option value="3">United States</mat-option>
+                                    <mat-option value="4">United Kingdom</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                              <div class="col">
+                                <mat-label class="font-sm text-med text-dim-gray">City</mat-label>
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                  <mat-select [(value)]="selectedOptionCity">
+                                    <mat-option value="1">-- Select City --</mat-option>
+                                    <mat-option value="2">Indore</mat-option>
+                                    <mat-option value="3">Bhopal</mat-option>
+                                    <mat-option value="4">Ujjain</mat-option>
+                                    <mat-option value="5">Ratlam</mat-option>
+                                    <mat-option value="6">Dewas</mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                          </form>
+                        </section>
+                      </div>
+                      <div class="col px-0 ml-3">
+                        <section class="content-box px-4 pt-5 pb-4">
+                          <h5>Subscription Plan</h5>
+                          <small class="text-med text-gray py-2 d-block">Current Plan</small>
+                          <h5>Basic(Free)</h5>
+                          <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                          <button type="submit" mat-button class="purple-btn px-4 py-2">Upgrade Plan</button>
+                        </section>
+                      </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Company">
+                    <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                      <div class="tabs-content">
+                        <h3 class="py-5">Comming Soon</h3>
+                        <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                      </div>
+                    </section>
+                </mat-tab>
+                <mat-tab label="Invoice">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Reminders">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Pricing">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Customers">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Orders">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Online Store">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Analytics">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+                <mat-tab label="Attendance">
+                  <section class="content-box mt-5 px-4 pt-5 pb-4 text-center">
+                    <div class="tabs-content">
+                      <h3 class="py-5">Comming Soon</h3>
+                      <img src="../../../../../assets/images/subscription-plan.png" class="img-fluid py-4" alt="Subscription Plan">
+                    </div>
+                  </section>
+                </mat-tab>
+              </mat-tab-group>
+            </section>
+        </div>
+    </div>
+  </div>
+  <div class="example-button-container fab-btn">
+    <button mat-fab aria-label="Example icon button with a home icon">
+      <mat-icon class="mx-1">chat</mat-icon>
+      <mat-icon class="mx-1">add_circle</mat-icon>
+    </button>
+  </div>
+    

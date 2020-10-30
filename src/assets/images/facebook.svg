@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8bfffc"/>
+      <stop offset="1" stop-color="#2ab5b1"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_3052" data-name="Group 3052" transform="translate(-340 -208)">
+    <rect id="Rectangle_409" data-name="Rectangle 409" width="32" height="32" rx="9" transform="translate(340 208)" fill="url(#linear-gradient)"/>
+    <path id="Icon_awesome-facebook-f" data-name="Icon awesome-facebook-f" d="M10.151,9.592l.474-3.086H7.661v-2A1.544,1.544,0,0,1,9.4,2.836H10.75V.208A16.443,16.443,0,0,0,8.358,0C5.918,0,4.322,1.478,4.322,4.154V6.506H1.609V9.592H4.322v7.461H7.661V9.592Z" transform="translate(349.391 215)" fill="#fff"/>
+  </g>
+</svg>

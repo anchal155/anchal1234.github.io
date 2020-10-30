@@ -1,0 +1,170 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav
+        opened
+        mode="side"
+        #sidenav
+        id="sidenav"
+        position="start"
+        [class.menu-open]="isMenuOpen"
+        [class.menu-close]="!isMenuOpen"
+    >
+        <div class="logo d-flex align-items-center px-4 pt-5">
+            <a [routerLink]="['/dashboard']"><span class="logo-text text-black" *ngIf="isMenuOpen">Storely</span></a>
+            <!-- <a [routerLink]="['/dashboard']"><span class="logo-text text-black" *ngIf="!isMenuOpen">S</span></a> -->
+            <!-- <span class="logo-text" *ngIf="!isMenuOpen">S</span> -->
+            <!-- <img src="../assets/images/logo-dark.png" alt=""> -->
+            <button mat-button [ngClass]="{'mx-auto' : !isMenuOpen}" class="ml-auto px-0" (click)="onMenuToggle()">
+                <mat-icon class="pale-blue menu-icon">menu</mat-icon>
+            </button>
+        </div>
+        <div class="store-section px-3 pb-3 mt-5">
+            <div class="store-logo px-1">
+                <img src="../assets/images/store-logo.png" alt="" class="px-1 pb-1">
+            </div>
+            <div class="store-name px-1 pb-2 d-flex justify-content-between" *ngIf="isMenuOpen" [matMenuTriggerFor]="menu">
+                <div class="store-name-inner">
+                   {{ (getuserinfo ? getuserinfo.shopData.store_name :'My Store')  | titlecase}} <mat-icon class="">keyboard_arrow_down</mat-icon>
+                </div>
+                <div class="social-icons">
+                    <a href="javascript:void(0)" class="facebook">
+                        <img src="../assets/images/facebook.png" alt="">
+                    </a>
+                    <a href="javascript:void(0)" class="linkedin mx-2">
+                        <img src="../assets/images/linkedin.png" alt="">
+                    </a>
+                    <a href="javascript:void(0)" class="twitter">
+                        <img src="../assets/images/twitter.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let shop of getusershopsList">
+                    {{shop.store_name}}  
+                    <mat-radio-button #activeshop name="active_shop" checked="{{(shop.status =='1')}}" (click)="active_shop(activeshop.value)" value="{{shop.store_name}}" ></mat-radio-button>
+                </button>            
+            </mat-menu>
+    
+            <div class="store-desc px-1" *ngIf="isMenuOpen">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem Ipsum.
+            </div>
+        </div>
+        <ul class="nav navbar-nav item py-3">
+        <li>
+            <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="home_rounded">home_rounded</mat-icon>
+                <span *ngIf="isMenuOpen">Home</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/products']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="local_offer">local_offer</mat-icon>
+                <span *ngIf="isMenuOpen">Products</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/receipt']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="receipt">receipt</mat-icon>
+                <span *ngIf="isMenuOpen">Invoices</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/customers']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="person_rounded">person_rounded</mat-icon>
+                <span *ngIf="isMenuOpen">Customers</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/Orders']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="assignment_rounded">assignment_rounded</mat-icon>
+                <span *ngIf="isMenuOpen">Orders</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/online-store']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="shopping_cart">shopping_cart</mat-icon>
+                <span *ngIf="isMenuOpen">Online Store</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/analytics']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="analytics">analytics</mat-icon>
+                <span *ngIf="isMenuOpen">Analytics</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/attendance']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="list_alt_rounded">list_alt_rounded</mat-icon>
+                <span *ngIf="isMenuOpen">Attendance</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <mat-icon class="mx-2" aria-label="settings">settings</mat-icon>
+                <span *ngIf="isMenuOpen">Settings</span>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/dashboard/logout']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="onLogout()">
+                <mat-icon class="mx-2" aria-label="exit_to_app_rounded">exit_to_app_rounded</mat-icon>
+                <span *ngIf="isMenuOpen">Logout</span>
+            </a>
+        </li>
+        </ul>
+        <div class="reminders-section px-3 py-5" *ngIf="isMenuOpen">
+            <div class="reminders-header d-flex justify-content-between">
+                <h4 class="mb-0">Reminders</h4>
+                <a href="#" class="view-all-btn">View All <mat-icon>keyboard_arrow_right</mat-icon></a>
+            </div>
+            <mat-list class="pt-4">
+                <mat-list-item class="reminder-list">
+                    <img matListAvatar src="../../../assets/images/booking-reminder.png" alt="...">
+                    <h6 matLine>Booking Reminder</h6>
+                    <p matLine>
+                        <span>Lorem ipsum dolor sit amet, consetetur</span>
+                    </p>
+                </mat-list-item>
+                <mat-list-item class="reminder-list">
+                    <img matListAvatar src="../../../assets/images/new-message.png" alt="...">
+                    <h6 matLine>New Message</h6>
+                    <p matLine>
+                        <span>Lorem ipsum dolor sit amet, consetetur</span>
+                    </p>
+                </mat-list-item>
+                <mat-list-item class="reminder-list">
+                    <img matListAvatar src="../../../assets/images/remaning-order.png" alt="...">
+                    <h6 matLine>Remaining Orders</h6>
+                    <p matLine>
+                        <span>Lorem ipsum dolor sit amet, consetetur</span>
+                    </p>
+                </mat-list-item>
+              </mat-list>
+        </div>
+        <div class="start-saving-section px-3 py-5 text-center" *ngIf="isMenuOpen">
+            <h4 class="text-left">Start Savings</h4>
+            <img src="../assets/images/start-savings.png" alt="" class="img-fluid">
+            <button mat-button class="purple-btn px-4 py-2">Upgrade To Pro</button>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content
+        id="main-container"
+        [ngStyle]="{ 'margin-left.vw': contentMargin }"
+    >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <app-topbar></app-topbar>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+
+  

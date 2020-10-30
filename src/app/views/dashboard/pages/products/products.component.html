@@ -1,0 +1,269 @@
+<div class="container-fluid content-wrapper pb-5">
+    <ng-template #addProduct>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="breadcrumbs text-gray">
+            <a routerLink="/dashboard" class="text-gray">Dashboard</a> <mat-icon>keyboard_arrow_right</mat-icon> Product List
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-12 pb-5 content-wrapper">
+              <h1 class="mb-4">Products</h1>
+              <section class="content-box text-center px-5 py-5">
+                  <img src="../../../../../assets/images/add-product.png" alt="">
+                  <h5 class="pb-3">Add and manage your products</h5>
+                  <h6 class="pb-3">This is where you’ll add products and manage your pricing. You can also import and export your product inventory.</h6>
+                  <button mat-button class="purple-btn mb-5" routerLink="/dashboard/products/add-product">Add Product</button>
+              </section>
+          </div>
+      </div>
+    </ng-template>    
+    <div class="row pb-3" *ngIf="productList?.length;else addProduct">   
+      <div class="col-lg-12 mb-4 d-flex align-items-center">
+        <h1 class="py-2">Product</h1>    
+        <div class="ml-auto py-2">
+          <button type="button" mat-button class="px-0 mr-2">
+            <mat-icon class="pale-blue">video_library</mat-icon>
+          </button>
+          <button type="button" mat-button class="px-0 mr-2">
+            <mat-icon class="pale-blue">info</mat-icon>
+          </button>
+          <button type="button" mat-button class="px-0 mr-2">
+            <mat-icon class="pale-blue">settings</mat-icon>
+          </button>
+          <button mat-button class="white-btn ml-auto px-4 mr-3 py-2">Bulk Add Items</button>
+          <button mat-button class="purple-btn ml-auto px-4 py-2"> <mat-icon class="font-xxl">add</mat-icon> Create Item</button>
+        </div>
+      </div>
+      <div class="col-lg-12 d-flex">
+        <section class="col content-box px-4 py-4">
+          <div class="row product-list-search add-product d-flex align-items-center">
+            <div class="col-lg-5">
+              <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-7 py-2">
+              <button type="button" mat-button class="px-0 mr-2">
+                <mat-icon class="pale-blue">info</mat-icon>
+              </button>
+              <button class="rose-btn font-sm text-normal mr-3" mat-button type="button">
+                Show Low Stock
+              </button>
+              <mat-form-field appearance="outline" class="mr-3">
+                <mat-select [(value)]="selectedOptionCat">
+                  <mat-option value="1">-- Categories --</mat-option>
+                  <mat-option value="2">Rice</mat-option>
+                  <mat-option value="3">Wheat</mat-option>
+                  <mat-option value="4">Sugar</mat-option>
+                  <mat-option value="5">Oil</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="">
+                <mat-select [(value)]="selectedOptionReport">
+                  <mat-option value="1">-- Reports --</mat-option>
+                  <mat-option value="2">Today</mat-option>
+                  <mat-option value="3">Yesterday</mat-option>
+                  <mat-option value="4">Last Week</mat-option>
+                  <mat-option value="5">Last Month</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+            <table mat-table [dataSource]="dataSource" #table class="mat-elevation-z8" matSort>
+  
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef> 
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                  [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                    Sr No.
+                    
+                  </th>
+                  <td mat-cell *matCellDef="let row; let i = index" >
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)"
+                                  [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                    # {{ i+1 }}
+                  </td>
+                </ng-container>              
+                
+                <!-- Product Column -->
+                <ng-container matColumnDef="product">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Product</th>
+                  <td mat-cell *matCellDef="let element"> <span><img width=80 src="{{ assetUrl }}/{{element.image}}"/></span> {{element.prod_name}}<br><span>{{element.cat_name}}</span> </td>
+                </ng-container>
+              
+                <!-- SKU Column -->
+                <ng-container matColumnDef="sku">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> SKU </th>
+                  <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
+                  
+                </ng-container>
+              
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.created_on | date:'medium'}} </td>
+                </ng-container>
+              
+                <!-- Stock Qty -->
+                <ng-container matColumnDef="stockqty">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Qty </th>
+                  <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+                </ng-container>
+                <!-- Stock Value Column -->
+                <ng-container matColumnDef="stockvalue">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Value </th>
+                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+                <!-- Selling Column -->
+                <ng-container matColumnDef="sellingprice">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Selling Price </th>
+                  <td mat-cell *matCellDef="let element"> {{element.sell_price}} </td>
+                </ng-container>
+                <!-- Purchase Column -->
+                <ng-container matColumnDef="purchaseprice">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Price </th>
+                  <td mat-cell *matCellDef="let element"> {{element.purchase_price}} </td>
+                </ng-container>
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item><mat-icon>edit</mat-icon> <span>Edit</span></button>
+                      <button mat-menu-item disabled><mat-icon>print</mat-icon><span>Print</span></button>
+                      <button mat-menu-item><mat-icon>delete</mat-icon><span>Delete</span></button>
+                      <button mat-menu-item><mat-icon>lock</mat-icon><span>Adjust Stock</span></button>
+                    </mat-menu> 
+                  </td>
+                </ng-container>
+                
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                    (click)="selection.toggle(row)">
+                </tr>
+              </table>
+            
+        </section>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-lg-12 pb-5 content-wrapper" style="display: none;">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            <table mat-table [dataSource]="dataSource" #table class="mat-elevation-z8" matSort>
+
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef> 
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                  [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                    S NO
+                    
+                  </th>
+                  <td mat-cell *matCellDef="let row; let i = index" >
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)"
+                                  [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                    # {{ i+1 }}
+                  </td>
+                </ng-container>              
+                
+                <!-- Product Column -->
+                <ng-container matColumnDef="product">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Product</th>
+                  <td mat-cell *matCellDef="let element"> <span><img width=80 src="{{ assetUrl }}/{{element.image}}"/></span> {{element.prod_name}}<br><span>{{element.cat_name}}</span> </td>
+                </ng-container>
+              
+                <!-- SKU Column -->
+                <ng-container matColumnDef="sku">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> SKU </th>
+                  <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
+                  
+                </ng-container>
+              
+                <!-- Date Column -->
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                  <td mat-cell *matCellDef="let element"> {{element.created_on | date:'medium'}} </td>
+                </ng-container>
+              
+                <!-- Stock Qty -->
+                <ng-container matColumnDef="stockqty">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Qty </th>
+                  <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+                </ng-container>
+                <!-- Stock Value Column -->
+                <ng-container matColumnDef="stockvalue">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Value </th>
+                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+                <!-- Selling Column -->
+                <ng-container matColumnDef="sellingprice">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Selling Price </th>
+                  <td mat-cell *matCellDef="let element"> {{element.sell_price}} </td>
+                </ng-container>
+                <!-- Purchase Column -->
+                <ng-container matColumnDef="purchaseprice">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Purchase Price </th>
+                  <td mat-cell *matCellDef="let element"> {{element.purchase_price}} </td>
+                </ng-container>
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item><mat-icon>edit</mat-icon> <span>Edit</span></button>
+                      <button mat-menu-item disabled><mat-icon>print</mat-icon><span>Print</span></button>
+                      <button mat-menu-item><mat-icon>delete</mat-icon><span>Delete</span></button>
+                      <button mat-menu-item><mat-icon>lock</mat-icon><span>Adjust Stock</span></button>
+                    </mat-menu> 
+                  </td>
+                </ng-container>
+                
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                    (click)="selection.toggle(row)">
+                </tr>
+              </table>
+            
+        </div>
+    </div>
+</div>
